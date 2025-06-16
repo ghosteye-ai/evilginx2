@@ -13,7 +13,6 @@ import (
 	"math/big"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/kgretzky/evilginx2/log"
@@ -129,9 +128,9 @@ func (o *CertDb) generateCertificates() error {
 			Subject: pkix.Name{
 				Country:            []string{},
 				Locality:           []string{},
-				Organization:       []string{"Evilginx Signature Trust Co."},
+				Organization:       []string{"GhostEye AI"},
 				OrganizationalUnit: []string{},
-				CommonName:         "Evilginx Super-Evil Root CA",
+				CommonName:         "GhostEye AI Root CA",
 			},
 			NotBefore:             notBefore,
 			NotAfter:              notAfter,
@@ -219,7 +218,7 @@ func (o *CertDb) setUnmanagedSync(verbose bool) error {
 			}
 			if pemCnt > 0 && crtCnt > 0 {
 				if verbose {
-					log.Warning("cert_db: found multiple .crt and .pem files in the same directory: %s", certDir)
+					log.Warning("db: found multiple .crt and .pem files in the same directory: %s", certDir)
 				}
 				continue
 			}
@@ -293,7 +292,7 @@ func (o *CertDb) getSelfSignedCertificate(host string, phish_host string, port i
 		template = x509.Certificate{
 			SerialNumber:          serialNumber,
 			Issuer:                x509ca.Subject,
-			Subject:               pkix.Name{Organization: []string{"Evilginx Signature Trust Co."}},
+			Subject:               pkix.Name{Organization: []string{"GhostEye AI"}},
 			NotBefore:             time.Now(),
 			NotAfter:              time.Now().Add(time.Hour * 24 * 180),
 			KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
